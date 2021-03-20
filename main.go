@@ -32,3 +32,20 @@ type Build struct {
 	Context    string `yaml:"context"`    // Build context
 	Dockerfile string `yaml:"dockerfile"` // Dockerfile path
 }
+
+func main() {
+	file, err := ioutil.ReadFile("docker-compose.yml")
+	if err != nil {
+		panic(err)
+	}
+
+	var e DockerCompose
+
+	err = yaml.Unmarshal(file, &e)
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(e)
+}
